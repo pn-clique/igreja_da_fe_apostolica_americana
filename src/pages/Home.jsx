@@ -545,7 +545,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full flex items-center bg-[#111111] justify-center py-14">
+        <div className="w-full flex items-center bg-[#111111] justify-center py-14 xs:px-8 md:px-28 2xl:px-36">
           <span className="text-center text-white text-sm">
             Todos os Direitos Reservados. Feito com 🤍 pela PN Clique
           </span>
