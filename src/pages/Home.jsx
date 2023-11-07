@@ -171,7 +171,7 @@ export default function Home() {
 
           <ul className="lg:flex xs:hidden items-center gap-6">
             <li>
-              <Link href="#">
+              <Link href="https://www.facebook.com/nossaigrej/">
                 <img className="w-6" src={headerFacebookIcon} alt="Facebook" />
               </Link>
             </li>
@@ -438,7 +438,7 @@ export default function Home() {
               <option
                 value={[String(-8.9032331), String(13.2124664), String(17)]}
               >
-                Igreja da Fé Apostólica Americana- Gamek
+                Igreja da Fé Apostólica Americana - Gamek
               </option>
               <option
                 value={[String(-12.3827377), String(13.5549241), String(17)]}
@@ -526,12 +526,12 @@ export default function Home() {
                   className="text-sm flex items-center gap-4 font-poppins_medium text-white"
                 >
                   <img src={footerPlaceIcon} className="w-5" alt="" />
-                  Localização da Igraja
+                  Angola, Luanda, Gamek.
                 </Link>
               </li>
 
               <li className="flex items-center gap-8">
-                <Link href="#">
+                <Link href="https://www.facebook.com/nossaigrej/">
                   <img src={footerFacebookIcon} className="w-8" alt="" />
                 </Link>
                 <Link href="#">
