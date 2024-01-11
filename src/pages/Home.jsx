@@ -17,6 +17,7 @@ import {
   image04,
   logo,
   menuIcon,
+  icons8Gmail,
 } from "../assets";
 import Button from "../components/common/Button/Button";
 import Container from "../components/layout/Container/Container";
@@ -35,29 +36,32 @@ export default function Home() {
   const [headerFixed, setHeaderFixed] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [openImageModal, setOpenImageModal] = useState(false);
-  const [locate, setLocate] = useState([-8.9032331, 13.2124664, 17]);
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      window.scrollY > 78 ? setHeaderFixed(true) : setHeaderFixed(false);
-    });
-  });
+  const [selectedOption, setSelectedOption] = useState("option1"); // Inicialize com a opção desejada
+  const [locate, setLocate] = useState([-8.9032331, 13.2124664]);
 
-  function handleSwitchLocation(e) {
-    e.preventDefault();
-    let lat = e.target.value.split(",")[0];
-    let log = e.target.value.split(",")[1];
-    let cod = e.target.value.split(",")[2];
-
-    let coord = [Number(lat), Number(log), Number(cod)];
-    setLocate(coord);
-    console.log(locate);
-  }
+  // Dicionário de opções para coordenadas
+  const options = {
+    option1: [-8.9032331, 13.2124664],
+    option2: [-8.796199, 13.287032],
+    option3: [-12.3827377, 13.5549241],
+    option4: [-14.9244564, 13.4987386],
+    option5: [-12.7641133, 15.7728475],
+  };
 
   function handleOpenImage(id) {
     setOpenImageModal(true);
     localStorage.setItem("image-view", id.toString());
   }
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      window.scrollY > 78 ? setHeaderFixed(true) : setHeaderFixed(false);
+    });
+    if (selectedOption) {
+      setLocate(options[selectedOption]);
+    }
+  }, [selectedOption]);
 
   return (
     <div className="'w-full relative overflow-x-hidden">
@@ -80,17 +84,19 @@ export default function Home() {
         <header
           className={`w-full py-10 flex items-center justify-between ${
             headerFixed
-              ? "fixed xs:px-8 md:px-28 2xl:px-36 z-30 bg-secondaryColor shadow-lg"
+              ? "fixed xs:px-8 md:px-28 2xl:px-36 z-30 bg-white shadow-lg"
               : ""
           }`}
         >
-          <h2 className=" xs:text-lg md:text-2xl font-poppins_semibold text-white">
-            Igreja da{" "}
-            <span className="font-poppins_semibold text-primaryColor">
-              Fé Apostólica
-            </span>{" "}
-            Americana
-          </h2>
+          <div className="bg-white h-20 px-8 py-8 flex items-center xs:gap-14 lg:gap-72">
+            <h2 className=" xs:text-lg md:text-2xl font-poppins_semibold text-black">
+              Igreja da{" "}
+              <span className="font-poppins_semibold text-black">
+                Fé Apostólica
+              </span>{" "}
+              Americana
+            </h2>
+          </div>
 
           <nav
             onClick={() => setOpenMenu(false)}
@@ -114,7 +120,9 @@ export default function Home() {
               <li>
                 <Link
                   href="#home"
-                  className="text-sm text-white hover:text-primaryColor transition duration-150 focus:text-primaryColor"
+                  className={`text-sm ${
+                    headerFixed ? "text-secondaryColor" : "text-white"
+                  } hover:text-primaryColor transition duration-150 focus:text-primaryColor`}
                 >
                   Início
                 </Link>
@@ -122,7 +130,9 @@ export default function Home() {
               <li>
                 <Link
                   href="#about_us"
-                  className="text-sm text-white hover:text-primaryColor transition duration-150 focus:text-primaryColor"
+                  className={`text-sm ${
+                    headerFixed ? "text-secondaryColor" : "text-white"
+                  } hover:text-primaryColor transition duration-150 focus:text-primaryColor`}
                 >
                   Sobre nós
                 </Link>
@@ -130,7 +140,9 @@ export default function Home() {
               <li>
                 <Link
                   href="#our_doutrins"
-                  className="text-sm text-white hover:text-primaryColor transition duration-150 focus:text-primaryColor"
+                  className={`text-sm ${
+                    headerFixed ? "text-secondaryColor" : "text-white"
+                  } hover:text-primaryColor transition duration-150 focus:text-primaryColor`}
                 >
                   Nossa Doutrinas
                 </Link>
@@ -138,7 +150,9 @@ export default function Home() {
               <li>
                 <Link
                   href="#our_activities"
-                  className="text-sm text-white hover:text-primaryColor transition duration-150 focus:text-primaryColor"
+                  className={`text-sm ${
+                    headerFixed ? "text-secondaryColor" : "text-white"
+                  } hover:text-primaryColor transition duration-150 focus:text-primaryColor`}
                 >
                   Nossa Actividades
                 </Link>
@@ -146,7 +160,9 @@ export default function Home() {
               <li>
                 <Link
                   href="#come_see_us"
-                  className="text-sm text-white hover:text-primaryColor transition duration-150 focus:text-primaryColor"
+                  className={`text-sm ${
+                    headerFixed ? "text-secondaryColor" : "text-white"
+                  } hover:text-primaryColor transition duration-150 focus:text-primaryColor`}
                 >
                   Localizações
                 </Link>
@@ -154,7 +170,9 @@ export default function Home() {
               <li>
                 <Link
                   href="#contact_us"
-                  className="text-sm text-white hover:text-primaryColor transition duration-150 focus:text-primaryColor"
+                  className={`text-sm ${
+                    headerFixed ? "text-secondaryColor" : "text-white"
+                  } hover:text-primaryColor transition duration-150 focus:text-primaryColor`}
                 >
                   Contactos
                 </Link>
@@ -176,7 +194,7 @@ export default function Home() {
               </Link>
             </li>
             <li>
-              <Link href="#">
+              <Link href="https://www.youtube.com/@ifaaangola">
                 <img className="w-6" src={headerYoutubeIcon} alt="Youtube" />
               </Link>
             </li>
@@ -205,23 +223,32 @@ export default function Home() {
           transition={{ duration: 1 }}
           className="w-full flex flex-col gap-8 xs:pt-14 md:pt-48"
         >
-          <h2 className="text-5xl 2xl:text-7xl text-white font-poppins_bold">
-            Seja bem vindo
+          <h2 className="text-5xl 2xl:text-7xl text-white font-poppins_medium">
+            Seja bem-vindo!
+          </h2>
+          <h2 className="text-5xl 2xl:text-7xl text-white font-poppins_medium">
+            Obrigado pela sua visita.
           </h2>
 
-          <p className="text-white text-base 2xl:text-base max-w-4xl leading-loose">
+          {/* <p className="text-white text-base 2xl:text-base max-w-4xl leading-loose">
             Nossa organização é conservadora por natureza, seguindo uma tradição
             de santidade Wesleyana praticada por aqueles sobre os quais o
             Espírito Santo desceu em Azusa.
-          </p>
+          </p> */}
 
           <div className="flex items-center gap-4">
-            <Button className="text-white border-2 border-white">
+            <Link
+              href="#our_doutrins"
+              className="text-white border-2 border-white  py-3 px-5 rounded"
+            >
               Saiba mais
-            </Button>
-            <Button className="border-2 bg-primaryColor border-primaryColor text-primaryFont font-poppins_medium">
+            </Link>
+            {/* <Link
+              href="#talk_ours"
+              className="border-2 bg-primaryColor border-primaryColor text-primaryFont font-poppins_medium py-3 px-5 rounded"
+            >
               Fale connosco
-            </Button>
+            </Link> */}
           </div>
         </motion.div>
       </section>
@@ -260,9 +287,12 @@ export default function Home() {
             </p>
           ))}
 
-          <Button className="border-2 bg-primaryColor border-primaryColor text-primaryFont font-poppins_medium">
+          <Link
+            href="#talk_ours"
+            className="border-2 bg-primaryColor border-primaryColor text-primaryFont font-poppins_medium py-3 px-5 rounded"
+          >
             Fale connosco
-          </Button>
+          </Link>
         </Animation>
       </Container>
 
@@ -336,9 +366,12 @@ export default function Home() {
             </p>
           ))}
 
-          <Button className="border-2 bg-primaryColor border-primaryColor text-primaryFont font-poppins_medium">
+          <Link
+            href="#talk_ours"
+            className="border-2 bg-primaryColor border-primaryColor text-primaryFont font-poppins_medium py-3 px-5 rounded"
+          >
             Fale connosco
-          </Button>
+          </Link>
         </Animation>
       </Container>
 
@@ -432,24 +465,29 @@ export default function Home() {
             <select
               name=""
               id=""
-              onChange={handleSwitchLocation}
+              value={selectedOption}
+              onChange={(e) => setSelectedOption(e.target.value)}
+              // onChange={handleSwitchLocation}
               className="p-4 w-full bg-gray-100 rounded-lg outline-none text text-gray-400 font-poppins_medium"
             >
-              <option
-                value={[String(-8.9032331), String(13.2124664), String(17)]}
-              >
+              <option value="option1">
                 Igreja da Fé Apostólica Americana - Gamek
               </option>
-              <option
-                value={[String(-12.3827377), String(13.5549241), String(17)]}
-              >
-                Igreja da Fé Apostólica Americana - Lobito
-              </option>
-              <option
-                value={[String(-8.7972858), String(13.2844043), String(16.95)]}
-              >
+              <option value="option2">
                 Igreja da Fé Apostólica Americana - Sambizanga
               </option>
+              <option value="option3">
+                Igreja da Fé Apostólica Americana - Lobito
+              </option>
+              <option value="option4">
+                Igreja da Fé Apostólica Americana - Lubango
+              </option>
+              <option value="option5">
+                Igreja da Fé Apostólica Americana - Catedral das crianças Huambo
+              </option>
+              {/* <option value="option6">
+                Igreja da Fé Apostólica Americana - Huambo
+              </option> */}
             </select>
           </form>
         </div>
@@ -507,7 +545,7 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-start gap-6">
+          <div id="talk_ours" className="flex flex-col items-start gap-6">
             <h2 className="text-xl font-semibold text-white">Contactos</h2>
 
             <ul className="flex flex-col gap-6">
@@ -517,7 +555,16 @@ export default function Home() {
                   className="text-sm flex items-center gap-4 font-poppins_medium text-white"
                 >
                   <img src={footerPhoneIcon} className="w-5" alt="" />
-                  +244 923 432 231
+                  +244 924 830 231
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#"
+                  className="text-sm flex items-center gap-4 font-poppins_medium text-white"
+                >
+                  <img src={icons8Gmail} className="w-5" alt="" />
+                  huambo.sede@ifaa.ao
                 </Link>
               </li>
               <li>
@@ -526,7 +573,7 @@ export default function Home() {
                   className="text-sm flex items-center gap-4 font-poppins_medium text-white"
                 >
                   <img src={footerPlaceIcon} className="w-5" alt="" />
-                  Angola, Luanda, Gamek.
+                  Angola, Huambo.
                 </Link>
               </li>
 
@@ -537,7 +584,7 @@ export default function Home() {
                 <Link href="#">
                   <img src={footerInstagramIcon} className="w-8" alt="" />
                 </Link>
-                <Link href="#">
+                <Link href="https://www.youtube.com/@ifaaangola">
                   <img src={footerYoutubeIcon} className="w-8" alt="" />
                 </Link>
               </li>

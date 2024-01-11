@@ -11,6 +11,7 @@ import menuIcon from "../assets/icons/header/icons8_Menu.svg";
 import closeMenuIcon from "../assets/icons/header/icons8_Close.svg";
 import footerPhoneIcon from "../assets/icons/footer/icons8_phone.svg";
 import footerInstagramIcon from "../assets/icons/footer/icons8_Instagram.svg";
+import icons8Gmail from "../assets/icons/footer/icons8_gmail.svg";
 import footerPlaceIcon from "../assets/icons/footer/icons8_place_marker.svg";
 import footerYoutubeIcon from "../assets/icons/footer/icons8_YouTube.svg";
 import footerFacebookIcon from "../assets/icons/footer/icons8_Facebook.svg";
@@ -24,7 +25,7 @@ import pubIcon from "../assets/icons/activities/icons8_holy_bible_2.svg";
 import image01 from "../assets/images/church/image01.png";
 import image02 from "../assets/images/church/image02.png";
 import image03 from "../assets/images/church/image03.png";
-import image04 from "../assets/images/church/qg.png";
+import image04 from "../assets/images/church/church1.jpg";
 
 // Gallery
 import gallery01 from "../assets/images/gallery/01.jpeg";
@@ -66,4 +67,5 @@ export {
   footerPhoneIcon,
   footerPlaceIcon,
   footerYoutubeIcon,
+  icons8Gmail
 };
